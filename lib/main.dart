@@ -58,14 +58,13 @@ class _HomePageState extends State<HomePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   final _formKey = GlobalKey<FormState>();
-
-  FocusNode _fnFullName;
-  FocusNode _fndateOfBirth;
-  FocusNode _fnsex;
-  FocusNode _fnjob;
-  FocusNode _fnreligion;
-  FocusNode _fnaddress;
-  FocusNode _fnSubmit;
+  final FocusNode _fnFullName = FocusNode();
+  final FocusNode _fndateOfBirth = FocusNode();
+  final FocusNode _fnsex = FocusNode();
+  final FocusNode _fnjob = FocusNode();
+  final FocusNode _fnreligion = FocusNode();
+  final FocusNode _fnaddress = FocusNode();
+  final FocusNode _fnSubmit = FocusNode();
 
   void initState() {
     super.initState();
@@ -180,13 +179,13 @@ class _HomePageState extends State<HomePage> {
                                 if (v.isEmpty) {
                                   return 'kolom tidak boleh kosong';
                                 } else {
-                                  // _fndateOfBirth.unfocus();
-                                  // FocusScope.of(context).requestFocus(_fnsex);
+                                  _fndateOfBirth.unfocus();
+                                  FocusScope.of(context).requestFocus(_fnsex);
                                 }
                                 return null;
                               },
                             ),
-                            TextFormField(
+                            TextField(
                               focusNode: _fnsex,
                               autofocus: true,
                               cursorColor: Colors.grey,
@@ -194,17 +193,17 @@ class _HomePageState extends State<HomePage> {
                                   labelText: "Jenis Kelamin",
                                   hintText: "Perempuan"),
                               controller: sex,
-                              validator: (v) {
+                              onSubmitted: (v) {
                                 if (v.isEmpty) {
                                   return 'kolom tidak boleh kosong';
                                 } else {
-                                  // _fnsex.unfocus();
-                                  // FocusScope.of(context).requestFocus(_fnjob);
+                                  _fnsex.unfocus();
+                                  FocusScope.of(context).requestFocus(_fnjob);
                                 }
                                 return null;
                               },
                             ),
-                            TextFormField(
+                            TextField(
                               focusNode: _fnjob,
                               autofocus: true,
                               cursorColor: Colors.grey,
@@ -212,36 +211,36 @@ class _HomePageState extends State<HomePage> {
                                   labelText: "Pekerjaan",
                                   hintText: "Belum Bekerja"),
                               controller: job,
-                              validator: (v) {
+                              onSubmitted: (v) {
                                 if (v.isEmpty) {
                                   return 'kolom tidak boleh kosong';
                                 } else {
-                                  // _fnjob.unfocus();
+                                  _fnjob.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(_fnreligion);
                                 }
                                 return null;
                               },
                             ),
-                            TextFormField(
+                            TextField(
                               focusNode: _fnreligion,
                               autofocus: true,
                               cursorColor: Colors.grey,
                               decoration: InputDecoration(
                                   labelText: "Agama", hintText: "Islam"),
                               controller: religion,
-                              validator: (v) {
+                              onSubmitted: (v) {
                                 if (v.isEmpty) {
                                   return 'kolom tidak boleh kosong';
                                 } else {
-                                  // _fnreligion.unfocus();
+                                  _fnreligion.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(_fnaddress);
                                 }
                                 return null;
                               },
                             ),
-                            TextFormField(
+                            TextField(
                               focusNode: _fnaddress,
                               autofocus: true,
                               minLines: 3,
@@ -252,11 +251,11 @@ class _HomePageState extends State<HomePage> {
                                   hintText:
                                       "Perum. Mega Pura Persada Rt/Rw 001/010 \nblok a4 no.5 kec. Cikungunya, Kab. Merotop"),
                               controller: address,
-                              validator: (v) {
+                              onSubmitted: (v) {
                                 if (v.isEmpty) {
                                   return 'kolom tidak boleh kosong';
                                 } else {
-                                  // _fnaddress.unfocus();
+                                  _fnaddress.unfocus();
                                   FocusScope.of(context)
                                       .requestFocus(_fnaddress);
                                 }
@@ -414,7 +413,7 @@ Future<Uint8List> generateDocument(PdfPageFormat format) async {
 
             pw.Paragraph(
                 text:
-                    '             Yang bertanda tangan di bawah ini Ketua RT. 03 RW 09 Desa Sukadami Kecamatan Cikarang Selatan Kabupaten Bekasi dengan ini menerangkan bahwa :'),
+                    '         Yang bertanda tangan di bawah ini Ketua RT. 03 RW 09 Desa Sukadami Kecamatan Cikarang Selatan Kabupaten Bekasi dengan ini menerangkan bahwa :'),
 
             pw.Center(
               child: pw.Align(
@@ -469,7 +468,7 @@ Future<Uint8List> generateDocument(PdfPageFormat format) async {
 
             pw.Paragraph(
                 text:
-                    '             Demikian surat keterangan ini kami buat, untuk dapat dipergunakan sebagai mana mestinya.'),
+                    '         Demikian surat keterangan ini kami buat, untuk dapat dipergunakan sebagai mana mestinya.'),
 
             pw.SizedBox(height: 10),
 

@@ -241,6 +241,7 @@ class _HomePageState extends State<HomePage> {
                               },
                             ),
                             TextField(
+                              keyboardType: TextInputType.text,
                               focusNode: _fnaddress,
                               autofocus: true,
                               minLines: 3,
@@ -252,14 +253,8 @@ class _HomePageState extends State<HomePage> {
                                       "Perum. Mega Pura Persada Rt/Rw 001/010 \nblok a4 no.5 kec. Cikungunya, Kab. Merotop"),
                               controller: address,
                               onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fnaddress.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_fnaddress);
-                                }
-                                return null;
+                                _fnaddress.unfocus();
+                                FocusScope.of(context).requestFocus(_fnSubmit);
                               },
                             ),
                             Container(

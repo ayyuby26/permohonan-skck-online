@@ -1,12 +1,12 @@
 import 'dart:io';
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/intl.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
+import 'package:skck/information.dart';
 import 'dart:typed_data';
 import 'general.dart';
 
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.grey,
         textSelectionHandleColor: Colors.grey,
       ),
-      home: HomePage(),
+      home: Information(),
     );
   }
 }
@@ -111,191 +111,207 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      key: _scaffoldKey,
-      body: SingleChildScrollView(
-        child: Container(
-          margin: EdgeInsets.only(top: 60),
-          child: Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: Text(
-                  "Aplikasi permohonan surat pengantar RT untuk pembuatan SKCK",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.all(10),
-                child: Image(
-                  image: AssetImage('lib/assets/logo.jpg'),
-                  height: 100,
-                ),
-              ),
-              Center(
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    margin: EdgeInsets.only(left: 20, right: 20),
-                    // height: MediaQuery.of(context).size.height / 5,
-                    child: Form(
-                      key: _formKey,
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            TextField(
-                              focusNode: _fnFullName,
-                              autofocus: true,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                labelText: "Nama lengkap",
-                                hintText: "Sucipto Mangun Kusumo",
-                              ),
-                              controller: fullName,
-                              onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fnFullName.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_fndateOfBirth);
-                                }
-                                return null;
-                              },
-                            ),
-                            TextField(
-                              focusNode: _fndateOfBirth,
-                              autofocus: true,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                hintText: "Bekasi, 26 April 1999",
-                                labelText: "Tempat/Tgl lahir",
-                              ),
-                              controller: dateOfBirth,
-                              onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fndateOfBirth.unfocus();
-                                  FocusScope.of(context).requestFocus(_fnsex);
-                                }
-                                return null;
-                              },
-                            ),
-                            TextField(
-                              focusNode: _fnsex,
-                              autofocus: true,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                  labelText: "Jenis Kelamin",
-                                  hintText: "Perempuan"),
-                              controller: sex,
-                              onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fnsex.unfocus();
-                                  FocusScope.of(context).requestFocus(_fnjob);
-                                }
-                                return null;
-                              },
-                            ),
-                            TextField(
-                              focusNode: _fnjob,
-                              autofocus: true,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                  labelText: "Pekerjaan",
-                                  hintText: "Belum Bekerja"),
-                              controller: job,
-                              onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fnjob.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_fnreligion);
-                                }
-                                return null;
-                              },
-                            ),
-                            TextField(
-                              focusNode: _fnreligion,
-                              autofocus: true,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                  labelText: "Agama", hintText: "Islam"),
-                              controller: religion,
-                              onSubmitted: (v) {
-                                if (v.isEmpty) {
-                                  return 'kolom tidak boleh kosong';
-                                } else {
-                                  _fnreligion.unfocus();
-                                  FocusScope.of(context)
-                                      .requestFocus(_fnaddress);
-                                }
-                                return null;
-                              },
-                            ),
-                            TextField(
-                              keyboardType: TextInputType.text,
-                              focusNode: _fnaddress,
-                              autofocus: true,
-                              minLines: 3,
-                              maxLines: null,
-                              cursorColor: Colors.grey,
-                              decoration: InputDecoration(
-                                  labelText: "Alamat",
-                                  hintText:
-                                      "Perum. Mega Pura Persada Rt/Rw 001/010 \nblok a4 no.5 kec. Cikungunya, Kab. Merotop"),
-                              controller: address,
-                              onSubmitted: (v) {
-                                _fnaddress.unfocus();
-                                FocusScope.of(context).requestFocus(_fnSubmit);
-                              },
-                            ),
-                            Container(
-                              margin: EdgeInsets.only(top: 10),
-                              child: RaisedButton(
-                                focusNode: _fnSubmit,
-                                onPressed: () async {
-                                  ByteData bytes = await rootBundle
-                                      .load("lib/assets/logo.jpg");
-                                  setState(() {
-                                    list = bytes.buffer.asUint8List();
-                                  });
-                                  await _localFile.then((value) {
-                                    value.writeAsBytesSync(doc.save());
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ViewPdf(),
-                                      ),
-                                    );
-                                  });
+    return MaterialApp(
+      theme: ThemeData(
+        primaryColor: Colors.grey,
+        primarySwatch: Colors.grey,
+        textSelectionHandleColor: Colors.grey,
+      ),
+      home: Scaffold(
+        backgroundColor: Colors.white,
+        key: _scaffoldKey,
+        body: DoubleBackToCloseApp(
+          snackBar: const SnackBar(
+            content: Text('Tap back again to leave'),
+          ),
+          child: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.only(top: 60),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Aplikasi permohonan surat pengantar RT untuk pembuatan SKCK",
+                      textAlign: TextAlign.center,
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(10),
+                    child: Image(
+                      image: AssetImage('lib/assets/logo.jpg'),
+                      height: 100,
+                    ),
+                  ),
+                  Center(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Container(
+                        margin: EdgeInsets.only(left: 20, right: 20),
+                        // height: MediaQuery.of(context).size.height / 5,
+                        child: Form(
+                          key: _formKey,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: <Widget>[
+                                TextField(
+                                  focusNode: _fnFullName,
+                                  autofocus: true,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                    labelText: "Nama lengkap",
+                                    hintText: "Sucipto Mangun Kusumo",
+                                  ),
+                                  controller: fullName,
+                                  onSubmitted: (v) {
+                                    if (v.isEmpty) {
+                                      return 'kolom tidak boleh kosong';
+                                    } else {
+                                      _fnFullName.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(_fndateOfBirth);
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextField(
+                                  focusNode: _fndateOfBirth,
+                                  autofocus: true,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                    hintText: "Bekasi, 26 April 1999",
+                                    labelText: "Tempat/Tgl lahir",
+                                  ),
+                                  controller: dateOfBirth,
+                                  onSubmitted: (v) {
+                                    if (v.isEmpty) {
+                                      return 'kolom tidak boleh kosong';
+                                    } else {
+                                      _fndateOfBirth.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(_fnsex);
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextField(
+                                  focusNode: _fnsex,
+                                  autofocus: true,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                      labelText: "Jenis Kelamin",
+                                      hintText: "Perempuan"),
+                                  controller: sex,
+                                  onSubmitted: (v) {
+                                    if (v.isEmpty) {
+                                      return 'kolom tidak boleh kosong';
+                                    } else {
+                                      _fnsex.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(_fnjob);
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextField(
+                                  focusNode: _fnjob,
+                                  autofocus: true,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                      labelText: "Pekerjaan",
+                                      hintText: "Belum Bekerja"),
+                                  controller: job,
+                                  onSubmitted: (v) {
+                                    if (v.isEmpty) {
+                                      return 'kolom tidak boleh kosong';
+                                    } else {
+                                      _fnjob.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(_fnreligion);
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextField(
+                                  focusNode: _fnreligion,
+                                  autofocus: true,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                      labelText: "Agama", hintText: "Islam"),
+                                  controller: religion,
+                                  onSubmitted: (v) {
+                                    if (v.isEmpty) {
+                                      return 'kolom tidak boleh kosong';
+                                    } else {
+                                      _fnreligion.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(_fnaddress);
+                                    }
+                                    return null;
+                                  },
+                                ),
+                                TextField(
+                                  keyboardType: TextInputType.text,
+                                  focusNode: _fnaddress,
+                                  autofocus: true,
+                                  minLines: 3,
+                                  maxLines: null,
+                                  cursorColor: Colors.grey,
+                                  decoration: InputDecoration(
+                                      labelText: "Alamat",
+                                      hintText:
+                                          "Perum. Mega Pura Persada Rt/Rw 001/010 \nblok a4 no.5 kec. Cikungunya, Kab. Merotop"),
+                                  controller: address,
+                                  onSubmitted: (v) {
+                                    _fnaddress.unfocus();
+                                    FocusScope.of(context)
+                                        .requestFocus(_fnSubmit);
+                                  },
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: RaisedButton(
+                                    focusNode: _fnSubmit,
+                                    onPressed: () async {
+                                      ByteData bytes = await rootBundle
+                                          .load("lib/assets/logo.jpg");
+                                      setState(() {
+                                        list = bytes.buffer.asUint8List();
+                                      });
+                                      await _localFile.then((value) {
+                                        value.writeAsBytesSync(doc.save());
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => ViewPdf(),
+                                          ),
+                                        );
+                                      });
 
-                                  // if (_formKey.currentState.validate()) {
-                                  //   // _scaffoldKey.currentState.showSnackBar(
-                                  //   //     SnackBar(
-                                  //   //         content: Text('Mengirim data')));
-                                  //   // imageCache.clear();
+                                      // if (_formKey.currentState.validate()) {
+                                      //   // _scaffoldKey.currentState.showSnackBar(
+                                      //   //     SnackBar(
+                                      //   //         content: Text('Mengirim data')));
+                                      //   // imageCache.clear();
 
-                                  // }
-                                },
-                                child: Text("Buat Surat Pengantar SKCK"),
-                              ),
-                            )
-                          ],
+                                      // }
+                                    },
+                                    child: Text("Buat Surat Pengantar SKCK"),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

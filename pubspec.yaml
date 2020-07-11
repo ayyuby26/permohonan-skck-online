@@ -32,6 +32,8 @@ dependencies:
   path_provider: ^1.6.11
   printing: ^3.5.0
   intl: ^0.15.7
+  double_back_to_close_app: ^1.2.0
+
 
 dev_dependencies:
   flutter_test:

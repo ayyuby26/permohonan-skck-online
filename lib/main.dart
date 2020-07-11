@@ -363,7 +363,7 @@ Future<Uint8List> generateDocument(PdfPageFormat format) async {
                                 pw.Text('KECAMATAN CIKARANG SELATAN',
                                     textScaleFactor: 1.5),
                                 pw.Text('DESA SUKADAMI', textScaleFactor: 1.5),
-                                pw.Text('Perumahan bla bla bla',
+                                pw.Text('Perumahan Griya Persada Indah',
                                     textScaleFactor: 1),
                               ]))),
                       pw.Flexible(
@@ -411,41 +411,57 @@ Future<Uint8List> generateDocument(PdfPageFormat format) async {
                     '         Yang bertanda tangan di bawah ini Ketua RT. 03 RW 09 Desa Sukadami Kecamatan Cikarang Selatan Kabupaten Bekasi dengan ini menerangkan bahwa :'),
 
             pw.Center(
+                child: pw.Container(
+              width: 350,
               child: pw.Align(
                 alignment: pw.Alignment.center,
                 child: pw.Table(children: [
                   pw.TableRow(children: [
-                    pw.Text("Nama"),
-                    pw.Paragraph(text: ":  " + fullName.text),
+                    pw.Container(
+                      width: 250,
+                      child: pw.Text("Nama"),
+                    ),
+                    pw.Text(" :  "),
+                    pw.Paragraph(text: fullName.text),
                   ]),
                   pw.TableRow(children: [
                     pw.Paragraph(text: "Tempat/Tgl. Lahir"),
-                    pw.Text(":  " + dateOfBirth.text),
+                    pw.Text(" :  "),
+                    pw.Text(dateOfBirth.text),
                   ]),
                   pw.TableRow(children: [
                     pw.Paragraph(text: "Jenis Kelamin"),
-                    pw.Text(":  " + sex.text),
+                    pw.Text(" :  "),
+                    pw.Text(sex.text),
                   ]),
                   pw.TableRow(children: [
                     pw.Paragraph(text: "Pekerjaan"),
-                    pw.Text(":  " + job.text),
+                    pw.Text(" :  "),
+                    pw.Text(job.text),
                   ]),
                   pw.TableRow(children: [
                     pw.Paragraph(text: "Agama"),
-                    pw.Text(":  " + religion.text),
+                    pw.Text(" :  "),
+                    pw.Text(religion.text),
                   ]),
                   pw.TableRow(children: [
-                    pw.Paragraph(text: "Alamat"),
-                    pw.Text(":  " + address.text),
+                    pw.Container(
+                      child: pw.Paragraph(text: "Alamat"),
+                    ),
+                    pw.Container(
+                      width: 30,
+                      child: pw.Text(" :  "),
+                    ),
+                    pw.Text(address.text),
                   ]),
                 ]),
               ),
-            ),
+            )),
             pw.SizedBox(height: 10),
 
             pw.RichText(
                 text: pw.TextSpan(
-                    text: "             Orang tersebut diatas, adalah ",
+                    text: "         Orang tersebut diatas, adalah ",
                     children: <pw.TextSpan>[
                   pw.TextSpan(
                       text:

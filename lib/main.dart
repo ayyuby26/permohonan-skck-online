@@ -122,7 +122,7 @@ class _HomePageState extends State<HomePage> {
         key: _scaffoldKey,
         body: DoubleBackToCloseApp(
           snackBar: const SnackBar(
-            content: Text('Tap back again to leave'),
+            content: Text('Tekan tombol kembali sekali lagi untuk keluar'),
           ),
           child: SingleChildScrollView(
             child: Container(

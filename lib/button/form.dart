@@ -79,12 +79,12 @@ class _SettingsItemState extends State<SettingsItem> {
         .gestures(
           onTapChange: (tapStatus) => setState(() => pressed = tapStatus),
           // onTapDown: (details) => print('tapDown'),
-          onTap: () {
-            Future.delayed(const Duration(milliseconds: 500), () async {
-              ByteData bytes = await rootBundle.load("lib/assets/logo.jpg");
-              setState(() {
-                list = bytes.buffer.asUint8List();
-              });
+          onTap: () async {
+            ByteData bytes = await rootBundle.load("lib/assets/logo.jpg");
+            setState(() {
+              list = bytes.buffer.asUint8List();
+            });
+            Future.delayed(const Duration(milliseconds: 500), () {
               Navigator.push(
                 context,
                 MaterialPageRoute(

@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:skck/main.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class UserPage extends StatelessWidget {
+
+
+
+class UserPage extends StatefulWidget {
+  @override
+  _UserPageState createState() => _UserPageState();
+}
+
+class _UserPageState extends State<UserPage> {
+  @override
+
   @override
   Widget build(BuildContext context) {
     double t = 30;
-    final page = ({Widget child}) => Styled.widget(child: child)
-        .padding(vertical: 30, horizontal: 20);
+    final page = ({Widget child}) =>
+        Styled.widget(child: child).padding(vertical: 30, horizontal: 20);
 
-    return Scaffold(backgroundColor: Colors.amber,
+    return Scaffold(
+      backgroundColor: Colors.amber,
       body: Center(
           child: Container(
         color: Colors.amber,
         child: <Widget>[
-          Container(height: MediaQuery.of(context).size.height/2.1,
+          Container(
+            height: MediaQuery.of(context).size.height / 2.1,
             margin: EdgeInsets.all(20),
             alignment: Alignment.center,
             child: Text(
@@ -35,7 +48,14 @@ class UserPage extends StatelessWidget {
       )),
     );
   }
+
 }
+
+
+
+
+
+
 
 class SettingsItemModel {
   final IconData icon;

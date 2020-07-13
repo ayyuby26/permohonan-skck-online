@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
-import 'main.dart';
 import 'package:printing/printing.dart';
+import 'doc.dart';
 
 class ViewPdf extends StatefulWidget {
   @override

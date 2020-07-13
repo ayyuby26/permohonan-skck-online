@@ -1,42 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:skck/main.dart';
 import 'package:styled_widget/styled_widget.dart';
 
-class UserPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    final page = ({Widget child}) =>
-        Styled.widget(child: child).padding(vertical: 30, horizontal: 20);
-
-    return Scaffold(
-      backgroundColor: Colors.amber,
-      body: Center(
-          child: Container(
-        color: Colors.amber,
-        child: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height / 2.1,
-            margin: EdgeInsets.all(20),
-            alignment: Alignment.center,
-            child: Text(
-              'PERHATIAN, Permohonan surat pengantar SKCK dari RT ini tetap membutuhkan stempel dari RT setempat',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  wordSpacing: 2),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Settings(),
-        ].toColumn().parent(page),
-      )),
-    );
-  }
-}
+import '../view_pdf.dart';
 
 class SettingsItemModel {
   final IconData icon;
@@ -55,12 +22,12 @@ const List<SettingsItemModel> settingsItems = [
   SettingsItemModel(
     icon: Icons.arrow_forward,
     color: Color(0xffFEC85C),
-    title: 'Saya Paham',
+    title: 'Buat Surat Pengantar',
     // description: 'dan paham',
   ),
 ];
 
-class Settings extends StatelessWidget {
+class FormButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => settingsItems
       .map((settingsItem) => SettingsItem(
@@ -94,7 +61,7 @@ class _SettingsItemState extends State<SettingsItem> {
 
   @override
   Widget build(BuildContext context) {
-    double t = 105;
+    double t = 85;
     final settingsItem = ({Widget child}) => Styled.widget(child: child)
         .alignment(Alignment.center)
         .borderRadius(all: 15)
@@ -113,13 +80,26 @@ class _SettingsItemState extends State<SettingsItem> {
           onTapChange: (tapStatus) => setState(() => pressed = tapStatus),
           // onTapDown: (details) => print('tapDown'),
           onTap: () {
-            Future.delayed(const Duration(milliseconds: 500), () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => HomePage()),
-            );
+            Future.delayed(const Duration(milliseconds: 500), () async {
+              ByteData bytes = await rootBundle.load("lib/assets/logo.jpg");
+              setState(() {
+                list = bytes.buffer.asUint8List();
+              });
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ViewPdf(),
+                ),
+              );
             });
 
+            // if (_formKey.currentState.validate()) {
+            //   // _scaffoldKey.currentState.showSnackBar(
+            //   //     SnackBar(
+            //   //         content: Text('Mengirim data')));
+            //   // imageCache.clear();
+
+            // }
           },
         )
         .scale(pressed ? 0.95 : 1.0, animate: true)

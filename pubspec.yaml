@@ -33,6 +33,7 @@ dependencies:
   printing: ^3.5.0
   intl: ^0.15.7
   double_back_to_close_app: ^1.2.0
+  styled_widget: ^0.2.1+2
 
 
 dev_dependencies:

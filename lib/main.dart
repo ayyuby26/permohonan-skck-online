@@ -41,12 +41,14 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.grey,
         textSelectionHandleColor: Colors.grey,
       ),
-      home: Information(),
+      home: Scaffold(
+        body: UserPage(),
+      ),
     );
   }
 }
 
-// ####################################################
+// #################################################ge
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -122,7 +124,7 @@ class _HomePageState extends State<HomePage> {
         key: _scaffoldKey,
         body: DoubleBackToCloseApp(
           snackBar: const SnackBar(
-            content: Text('Tekan tombol kembali sekali lagi untuk keluar'),
+            content: Text('Tekan sekali lagi untuk keluar'),
           ),
           child: SingleChildScrollView(
             child: Container(

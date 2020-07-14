@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:skck/information.dart';
+import 'package:skck/views/procedure.dart';
 import 'dart:typed_data';
 import 'general.dart';
-import 'package:styled_widget/styled_widget.dart';
 import 'button/form.dart';
 
 Uint8List list;
@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
         textSelectionHandleColor: Colors.grey,
       ),
       home: Scaffold(
-        body: UserPage(),
+        body: UserPage(), //UserPage()
       ),
     );
   }
@@ -285,13 +285,21 @@ class _HomePageState extends State<HomePage> {
                                         .requestFocus(_fnSubmit);
                                   },
                                 ),
-],
+                              ],
                             ),
                           ),
                         ),
                       ),
                     ),
                   ),
+                  Container(
+                      margin: EdgeInsets.all(10),
+                      child: FlatButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => Procedure()));
+                          },
+                          child: Text("Lihat Panduan"))),
                   FormButton(),
                 ],
               ),

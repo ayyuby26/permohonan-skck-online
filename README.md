@@ -2,7 +2,7 @@
 
 Aplikasi ini dibuat dengan Framework Flutter, dan sudah di uji di android.
 
-- [semua arsitektur Size](https://github.com/ayyuby26/permohonan-skck-online/raw/master/app-release.apk)
+- [semua arsitektur Size 19.9MB](https://github.com/ayyuby26/permohonan-skck-online/raw/master/app-release.apk)
 
 Screenshot
 ![](https://github.com/ayyuby26/permohonan-skck-online/raw/master/Screenshot_2020-07-16-16-10-13-118_com.uas.skck.jpg)

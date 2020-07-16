@@ -171,7 +171,7 @@ class _ProcedureState extends State<Procedure> {
                           style: TextStyle(fontWeight: FontWeight.bold)),
                       TextSpan(
                           text:
-                              ', tapi terakhir gw ditagih gocap (*sfx:sedih), jadi hati-hati aj, gw jg dipintain duit rokok tapi gw tolak'),
+                              ', jangan mau bayar apapun selain biaya diatas'),
                     ],
                   ),
                 ),

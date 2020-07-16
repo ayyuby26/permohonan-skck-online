@@ -113,13 +113,10 @@ class _SettingsItemState extends State<SettingsItem> {
           onTapChange: (tapStatus) => setState(() => pressed = tapStatus),
           // onTapDown: (details) => print('tapDown'),
           onTap: () {
-            Future.delayed(const Duration(milliseconds: 500), () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (_) => HomePage()),
-            );
-            });
-
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => HomePage()),
+              );
           },
         )
         .scale(pressed ? 0.95 : 1.0, animate: true)
@@ -152,19 +149,13 @@ class _SettingsItemState extends State<SettingsItem> {
     // );
 
     return settingsItem(
-        child: Container(
-      margin: EdgeInsets.only(left: t, right: t),
-      alignment: Alignment.center,
-      child: <Widget>[
-        <Widget>[
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
           title,
-          // description,
-        ].toColumn(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-        ),
-        icon,
-      ].toRow(),
-    ));
+          icon,
+        ],
+      ),
+    );
   }
 }

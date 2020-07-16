@@ -61,7 +61,6 @@ class _SettingsItemState extends State<SettingsItem> {
 
   @override
   Widget build(BuildContext context) {
-    double t = 85;
     final settingsItem = ({Widget child}) => Styled.widget(child: child)
         .alignment(Alignment.center)
         .borderRadius(all: 15)
@@ -84,14 +83,12 @@ class _SettingsItemState extends State<SettingsItem> {
             setState(() {
               list = bytes.buffer.asUint8List();
             });
-            Future.delayed(const Duration(milliseconds: 500), () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ViewPdf(),
-                ),
-              );
-            });
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ViewPdf(),
+              ),
+            );
 
             // if (_formKey.currentState.validate()) {
             //   // _scaffoldKey.currentState.showSnackBar(
@@ -115,6 +112,7 @@ class _SettingsItemState extends State<SettingsItem> {
 
     final Widget title = Text(
       widget.title,
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         color: Colors.grey[450],
@@ -132,19 +130,13 @@ class _SettingsItemState extends State<SettingsItem> {
     // );
 
     return settingsItem(
-        child: Container(
-      margin: EdgeInsets.only(left: t, right: t),
-      alignment: Alignment.center,
-      child: <Widget>[
-        <Widget>[
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
           title,
-          // description,
-        ].toColumn(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-        ),
-        icon,
-      ].toRow(),
-    ));
+          icon,
+        ],
+      ),
+    );
   }
 }

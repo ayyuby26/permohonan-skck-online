@@ -102,10 +102,13 @@ class _SettingsItemState extends State<SettingsItem> {
         .scale(pressed ? 0.95 : 1.0, animate: true)
         .animate(Duration(milliseconds: 150), Curves.easeOut);
 
-    final Widget icon = Icon(widget.icon, size: 20, color: Colors.white)
+    final Widget icon = Image(
+                      image: AssetImage('lib/assets/insert_64px.png'), 
+                      height: 20,
+                    )
         .padding(all: 12)
         .decorated(
-          color: widget.iconBgColor,
+          // color: widget.iconBgColor,
           borderRadius: BorderRadius.circular(30),
         )
         .padding(left: 15, right: 10);

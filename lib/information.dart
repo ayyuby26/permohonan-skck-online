@@ -7,7 +7,6 @@ class UserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final page = ({Widget child}) =>
         Styled.widget(child: child).padding(vertical: 30, horizontal: 20);
-
     return Scaffold(
       backgroundColor: Colors.amber,
       body: Center(
@@ -113,10 +112,10 @@ class _SettingsItemState extends State<SettingsItem> {
           onTapChange: (tapStatus) => setState(() => pressed = tapStatus),
           // onTapDown: (details) => print('tapDown'),
           onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (_) => HomePage()),
-              );
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => HomePage()),
+            );
           },
         )
         .scale(pressed ? 0.95 : 1.0, animate: true)

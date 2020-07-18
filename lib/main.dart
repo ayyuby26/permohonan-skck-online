@@ -299,7 +299,17 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (_) => Procedure()));
                           },
-                          child: Text("Lihat Panduan"))),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text("Lihat Panduan"),
+                              SizedBox(width: 10,),
+                              Image(
+                      image: AssetImage('lib/assets/syarat_64px.png'),
+                      height: 20,
+                    ),
+                            ],
+                          ))),
                   FormButton(),
                 ],
               ),

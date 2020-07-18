@@ -1,16 +1,5 @@
-# skck
+#### Surat Pengantar SKCK
 
-A new Flutter project.
+Aplikasi ini dibuat dengan Framework Flutter, dan sudah di uji di smartphone android dan di debug di Android Studio.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+digunakan untuk membantu para pencari kerja yang ingin membuat surat pengantar rt untuk membuat skck, dengan aplikasi ini para pencari kerja dimudahkan untuk membuat surat pengantar tersebut tanpa menggunakan komputer, dengan catatan tetap membutuhkan stempel dari RT setempat agar dokumen yang di cetak menjadi sah.
